@@ -15,7 +15,7 @@ public partial class LotteryPage : ContentPage
         schoolClass.LoadFromFile();
     }
 
-    private void DrawRandomStudent(object sender, EventArgs e)
+    private void DrawStudent(object sender, EventArgs e)
     {
         if (schoolClass.Students.Count == 0)
         {
@@ -23,7 +23,7 @@ public partial class LotteryPage : ContentPage
             return;
         }
 
-        int index = random.Next(schoolClass.Students.Count);
-        ResultLabel.Text = schoolClass.Students[index].ToString();
+        var student = schoolClass.Students[random.Next(schoolClass.Students.Count)];
+        ResultLabel.Text = student.Name;
     }
 }

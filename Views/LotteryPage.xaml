@@ -6,10 +6,9 @@
     <VerticalStackLayout>
         <Label
             x:Name="ResultLabel"
-            Text="Kliknij losuj"/>
-
+            Text="Aby wylosowac ucznia kliknij przycisk"/>
         <Button
             Text="Losuj"
-            Clicked="DrawRandomStudent" />
+            Clicked="DrawStudent" />
     </VerticalStackLayout>
 </ContentPage>

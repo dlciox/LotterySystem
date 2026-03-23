@@ -5,7 +5,7 @@ namespace LotterySystem.Views;
 public partial class ClassEditPage : ContentPage
 {
     SchoolClass schoolClass;
-    Student selectedStudent;
+    Student student;
 
     public ClassEditPage(string className)
     {
@@ -36,27 +36,27 @@ public partial class ClassEditPage : ContentPage
 
     private void SelectStudent(object sender, SelectionChangedEventArgs e)
     {
-        selectedStudent = e.CurrentSelection.FirstOrDefault() as Student;
+        student = e.CurrentSelection.FirstOrDefault() as Student;
     }
 
     private async void EditStudent(object sender, EventArgs e)
     {
-        if (selectedStudent == null)
+        if (student == null)
         {
             await DisplayAlert("Błąd", "Wybierz ucznia z listy", "OK");
             return;
         }
 
-        string newFirstName = await DisplayPromptAsync("Edycja", "Nowe imię:", initialValue: selectedStudent.FirstName);
+        string newFirstName = await DisplayPromptAsync("Edycja", "Nowe imię:", initialValue: student.FirstName);
         if (string.IsNullOrWhiteSpace(newFirstName))
             return;
 
-        string newLastName = await DisplayPromptAsync("Edycja", "Nowe nazwisko:", initialValue: selectedStudent.LastName);
+        string newLastName = await DisplayPromptAsync("Edycja", "Nowe nazwisko:", initialValue: student.LastName);
         if (string.IsNullOrWhiteSpace(newLastName))
             return;
 
-        selectedStudent.FirstName = newFirstName;
-        selectedStudent.LastName = newLastName;
+        student.FirstName = newFirstName;
+        student.LastName = newLastName;
 
         SortStudents();
         RenumberStudents();
@@ -65,14 +65,14 @@ public partial class ClassEditPage : ContentPage
 
     private async void RemoveStudent(object sender, EventArgs e)
     {
-        if (selectedStudent == null)
+        if (student == null)
         {
             await DisplayAlert("Błąd", "Wybierz ucznia z listy", "OK");
             return;
         }
 
-        schoolClass.Students.Remove(selectedStudent);
-        selectedStudent = null;
+        schoolClass.Students.Remove(student);
+        student = null;
         SortStudents();
         RenumberStudents();
         RefreshList();

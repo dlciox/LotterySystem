@@ -7,7 +7,7 @@
         <VerticalStackLayout Padding="20" Spacing="10">
 
             <Label Text="Dodaj ucznia:" />
-            <Entry x:Name="FirstNameEntry" Placeholder="Imię" />
+            <Entry x:Name="FirstNameEntry" Placeholder="Imie" />
             <Entry x:Name="LastNameEntry" Placeholder="Nazwisko" />
             <Button Text="Dodaj ucznia" Clicked="AddStudent" />
 
@@ -22,7 +22,7 @@
                             HeightRequest="300">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="10" Margin="0,2" BorderColor="LightGray" CornerRadius="5">
+                        <Frame Padding="10" Margin="1" BorderColor="LightGray" CornerRadius="5">
                             <HorizontalStackLayout Spacing="5">
                                 <Label Text="{Binding Number}" VerticalOptions="Center" />
                                 <Label Text="." VerticalOptions="Center" />

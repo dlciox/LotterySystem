@@ -9,6 +9,7 @@ namespace LotterySystem.Models
         public int Number { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Name => $"{FirstName} {LastName}";
 
         public Student(int number, string firstName, string lastName)
         {

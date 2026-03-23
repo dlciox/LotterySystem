@@ -15,12 +15,7 @@ public partial class MainPage : ContentPage
 
     private void LoadClasses()
     {
-        string folderPath = Path.Combine(FileSystem.AppDataDirectory, "Classes");
-
-        if (!Directory.Exists(folderPath))
-        {
-            Directory.CreateDirectory(folderPath);
-        }
+        string folderPath = ClassFolderPath();
 
         ClassPicker.Items.Clear();
 
@@ -48,12 +43,7 @@ public partial class MainPage : ContentPage
             return;
         }
 
-        string folderPath = Path.Combine(FileSystem.AppDataDirectory, "Classes");
-
-        if (!Directory.Exists(folderPath))
-        {
-            Directory.CreateDirectory(folderPath);
-        }
+        string folderPath = ClassFolderPath();
 
         string filePath = Path.Combine(folderPath, className + ".txt");
 
@@ -72,25 +62,27 @@ public partial class MainPage : ContentPage
 
     private async void OpenClassEditor(object sender, EventArgs e)
     {
-        if (ClassPicker.SelectedItem == null)
-        {
-            await DisplayAlert("Błąd", "Wybierz klase", "OK");
-            return;
-        }
+        if (ClassPicker.SelectedItem == null) return;
 
-        string className = ClassPicker.SelectedItem.ToString();
+        var className = ClassPicker.SelectedItem.ToString();
         await Navigation.PushAsync(new ClassEditPage(className));
     }
 
     private async void OpenLotteryPage(object sender, EventArgs e)
     {
-        if (ClassPicker.SelectedItem == null)
-        {
-            await DisplayAlert("Błąd", "Wybierz klasę", "OK");
-            return;
-        }
+        if (ClassPicker.SelectedItem == null) return;
 
-        string className = ClassPicker.SelectedItem.ToString();
+        var className = ClassPicker.SelectedItem.ToString();
         await Navigation.PushAsync(new LotteryPage(className));
+    }
+
+    private string ClassFolderPath()
+    {
+        string path = Path.Combine(FileSystem.AppDataDirectory, "Classes");
+
+        if (!Directory.Exists(path))
+            Directory.CreateDirectory(path);
+
+        return path;
     }
 }
